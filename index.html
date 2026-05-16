@@ -757,50 +757,47 @@ async function buscarCep() {
   status.textContent = 'Buscando...';
   status.style.color = 'var(--texto-suave)';
 
-  // Tenta ViaCEP primeiro, depois BrasilAPI como fallback
-  const apis = [
-    { url: `https://viacep.com.br/ws/${cep}/json/`, map: d => ({ rua: d.logradouro, bairro: d.bairro, cidade: d.localidade, uf: d.uf, erro: d.erro }) },
-    { url: `https://brasilapi.com.br/api/cep/v1/${cep}`, map: d => ({ rua: d.street, bairro: d.neighborhood, cidade: d.city, uf: d.state, erro: d.message }) }
-  ];
-
-  for (const api of apis) {
-    try {
-      const res = await fetch(api.url, { signal: AbortSignal.timeout(5000) });
-      if (!res.ok) continue;
-      const data = await res.json();
-      const info = api.map(data);
-      if (info.erro) { status.textContent = 'CEP nao encontrado'; status.style.color = '#c0392b'; return; }
-      document.getElementById('clienteRua').value = info.rua || '';
-      document.getElementById('clienteBairro').value = info.bairro || '';
-      document.getElementById('clienteCidade').value = info.cidade || '';
-      document.getElementById('clienteUf').value = info.uf || '';
-      status.textContent = 'Endereco encontrado!';
-      status.style.color = 'var(--verde-medio)';
-      document.getElementById('clienteNumero').focus();
-      return;
-    } catch(e) { continue; }
+  function preencherCampos(rua, bairro, cidade, uf) {
+    document.getElementById('clienteRua').value = rua || '';
+    document.getElementById('clienteBairro').value = bairro || '';
+    document.getElementById('clienteCidade').value = cidade || '';
+    document.getElementById('clienteUf').value = uf || '';
+    status.textContent = 'Endereco encontrado!';
+    status.style.color = 'var(--verde-medio)';
+    document.getElementById('clienteNumero').focus();
   }
 
-  // Se todas as APIs falharem, preenche cidade por faixa de CEP
+  // API 1: ViaCEP
+  try {
+    const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal: AbortSignal.timeout(8000) });
+    if (res.ok) {
+      const d = await res.json();
+      if (!d.erro) { preencherCampos(d.logradouro, d.bairro, d.localidade, d.uf); return; }
+      status.textContent = 'CEP nao encontrado'; status.style.color = '#c0392b'; return;
+    }
+  } catch(e) {}
+
+  // API 2: BrasilAPI
+  try {
+    const res = await fetch(`https://brasilapi.com.br/api/cep/v2/${cep}`, { signal: AbortSignal.timeout(8000) });
+    if (res.ok) {
+      const d = await res.json();
+      if (d.cep) { preencherCampos(d.street, d.neighborhood, d.city, d.state); return; }
+    }
+  } catch(e) {}
+
+  // API 3: OpenCEP
+  try {
+    const res = await fetch(`https://opencep.com/v1/${cep}`, { signal: AbortSignal.timeout(8000) });
+    if (res.ok) {
+      const d = await res.json();
+      if (d.cep) { preencherCampos(d.logradouro, d.bairro, d.localidade, d.uf); return; }
+    }
+  } catch(e) {}
+
+  // Todas falharam — pede preenchimento manual
   status.textContent = 'Preencha o endereco manualmente';
   status.style.color = '#c0392b';
-  const n = parseInt(cep);
-  const cidades = [
-    { min:12200000, max:12249999, cidade:'Sao Jose dos Campos', uf:'SP' },
-    { min:12250000, max:12299999, cidade:'Sao Jose dos Campos', uf:'SP' },
-    { min:01000000, max:09999999, cidade:'Sao Paulo', uf:'SP' },
-    { min:20000000, max:28999999, cidade:'Rio de Janeiro', uf:'RJ' },
-    { min:30000000, max:39999999, cidade:'Belo Horizonte', uf:'MG' },
-    { min:80000000, max:87999999, cidade:'Curitiba', uf:'PR' },
-    { min:90000000, max:99999999, cidade:'Porto Alegre', uf:'RS' },
-  ];
-  const match = cidades.find(c => n >= c.min && n <= c.max);
-  if (match) {
-    document.getElementById('clienteCidade').value = match.cidade;
-    document.getElementById('clienteUf').value = match.uf;
-    status.textContent = 'Preencha rua e bairro';
-    status.style.color = '#c0392b';
-  }
 }
 
 function toggleRetirada() {
