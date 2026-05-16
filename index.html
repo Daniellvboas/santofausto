@@ -762,8 +762,14 @@ async function buscarCep() {
     document.getElementById('clienteBairro').value = bairro || '';
     document.getElementById('clienteCidade').value = cidade || '';
     document.getElementById('clienteUf').value = uf || '';
-    status.textContent = 'Endereco encontrado!';
-    status.style.color = 'var(--verde-medio)';
+    // CEP geral de cidade — rua e bairro vazios é normal
+    if (!rua && !bairro && cidade) {
+      status.textContent = 'CEP geral — preencha rua e bairro';
+      status.style.color = '#c8a96e';
+    } else {
+      status.textContent = 'Endereco encontrado!';
+      status.style.color = 'var(--verde-medio)';
+    }
     document.getElementById('clienteNumero').focus();
   }
 
