@@ -518,7 +518,7 @@
       <div class="entrega-campo">
         <label>CEP</label>
         <div style="display:flex;gap:0.5rem;align-items:center">
-          <input type="text" id="clienteCep" placeholder="Ex: 12243-630" maxlength="9" oninput="formatarCep(this)" onblur="buscarCep()">
+          <input type="text" id="clienteCep" placeholder="Ex: 12243-630" maxlength="9" oninput="formatarCep(this)" onblur="buscarCep()" onkeydown="if(event.key==='Enter'){event.preventDefault();buscarCep();}">
           <span id="cepStatus" style="font-size:0.78rem;color:var(--verde-medio);white-space:nowrap"></span>
         </div>
       </div>
