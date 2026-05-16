@@ -211,6 +211,18 @@
   .btn-pedir-wpp:hover { background: #1db954; transform: translateY(-1px); }
   .cart-aviso { font-size: 0.72rem; color: var(--texto-suave); text-align: center; margin-top: 0.8rem; line-height: 1.5; }
 
+  /* ── FORMULÁRIO ENTREGA ── */
+  .entrega-form { padding: 1rem 1.5rem; border-top: 1px solid rgba(74,124,74,0.12); background: var(--verde-palido); }
+  .entrega-titulo { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+  .entrega-campo { margin-bottom: 0.7rem; }
+  .entrega-campo label { display: block; font-size: 0.72rem; font-weight: 500; color: var(--verde-escuro); margin-bottom: 0.3rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .entrega-campo input, .entrega-campo textarea { width: 100%; background: white; border: 1px solid rgba(74,124,74,0.25); border-radius: 2px; padding: 0.6rem 0.8rem; font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 300; color: var(--texto); outline: none; transition: border-color 0.2s; resize: none; }
+  .entrega-campo input:focus, .entrega-campo textarea:focus { border-color: var(--verde-medio); }
+  .entrega-campo input::placeholder, .entrega-campo textarea::placeholder { color: #aaa; }
+  .entrega-retirada { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; cursor: pointer; }
+  .entrega-retirada input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--verde-escuro); cursor: pointer; }
+  .entrega-retirada span { font-size: 0.82rem; color: var(--texto-suave); }
+
   /* ── MOBILE ── */
   @media (max-width: 768px) {
     .nav-links { display: none; }
@@ -495,16 +507,70 @@
       <p style="margin-top:0.3rem;font-size:0.82rem">Adicione produtos para pedir pelo WhatsApp!</p>
     </div>
   </div>
+  <!-- FORMULÁRIO ENTREGA -->
+  <div class="entrega-form" id="entregaForm">
+    <div class="entrega-titulo">Dados para entrega</div>
+    <div class="entrega-campo">
+      <label>Seu nome</label>
+      <input type="text" id="clienteNome" placeholder="Ex: Maria Silva" maxlength="80">
+    </div>
+    <div id="camposEntrega">
+      <div class="entrega-campo">
+        <label>CEP</label>
+        <div style="display:flex;gap:0.5rem;align-items:center">
+          <input type="text" id="clienteCep" placeholder="Ex: 12243-630" maxlength="9" oninput="formatarCep(this)" onblur="buscarCep()">
+          <span id="cepStatus" style="font-size:0.78rem;color:var(--verde-medio);white-space:nowrap"></span>
+        </div>
+      </div>
+      <div class="entrega-campo">
+        <label>Rua / Avenida</label>
+        <input type="text" id="clienteRua" placeholder="Preenchido automaticamente pelo CEP">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
+        <div class="entrega-campo">
+          <label>Número</label>
+          <input type="text" id="clienteNumero" placeholder="Ex: 123" maxlength="10">
+        </div>
+        <div class="entrega-campo">
+          <label>Complemento</label>
+          <input type="text" id="clienteComplemento" placeholder="Apto, Casa..." maxlength="40">
+        </div>
+      </div>
+      <div class="entrega-campo">
+        <label>Bairro</label>
+        <input type="text" id="clienteBairro" placeholder="Preenchido automaticamente pelo CEP">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 0.4fr;gap:0.6rem">
+        <div class="entrega-campo">
+          <label>Cidade</label>
+          <input type="text" id="clienteCidade" placeholder="Preenchido automaticamente">
+        </div>
+        <div class="entrega-campo">
+          <label>UF</label>
+          <input type="text" id="clienteUf" placeholder="SP" maxlength="2">
+        </div>
+      </div>
+    </div>
+    <label class="entrega-retirada">
+      <input type="checkbox" id="retiradaLoja" onchange="toggleRetirada()">
+      <span>Vou retirar na loja — R. Santa Clara, 1050</span>
+    </label>
+    <div class="entrega-campo" style="margin-top:0.7rem">
+      <label>Observações (opcional)</label>
+      <input type="text" id="clienteObs" placeholder="Ex: Ligar antes de entregar">
+    </div>
+  </div>
+
   <div class="cart-footer">
     <div class="cart-total">
-      <span>Total estimado</span>
+      <span>Subtotal dos produtos</span>
       <strong id="cartTotal">R$ 0,00</strong>
     </div>
     <button class="btn-pedir-wpp" onclick="pedirWhatsApp()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Pedir pelo WhatsApp
+      Enviar pedido pelo WhatsApp
     </button>
-    <p class="cart-aviso">Você será direcionado ao WhatsApp com seu pedido já preenchido. Confirmamos disponibilidade e combinamos a entrega.</p>
+    <p class="cart-aviso">Após enviar, o Santo Fausto calcula o frete e confirma a disponibilidade dos produtos.</p>
   </div>
 </div>
 
@@ -677,12 +743,118 @@ function fecharCarrinho() {
   document.getElementById('cartOverlay').classList.remove('aberto');
 }
 
+function formatarCep(input) {
+  let v = input.value.replace(/\D/g, '');
+  if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5,8);
+  input.value = v;
+}
+
+async function buscarCep() {
+  const cep = document.getElementById('clienteCep').value.replace(/\D/g,'');
+  const status = document.getElementById('cepStatus');
+  if (cep.length !== 8) return;
+  status.textContent = 'Buscando...';
+  status.style.color = 'var(--texto-suave)';
+
+  // Tenta ViaCEP primeiro, depois BrasilAPI como fallback
+  const apis = [
+    { url: `https://viacep.com.br/ws/${cep}/json/`, map: d => ({ rua: d.logradouro, bairro: d.bairro, cidade: d.localidade, uf: d.uf, erro: d.erro }) },
+    { url: `https://brasilapi.com.br/api/cep/v1/${cep}`, map: d => ({ rua: d.street, bairro: d.neighborhood, cidade: d.city, uf: d.state, erro: d.message }) }
+  ];
+
+  for (const api of apis) {
+    try {
+      const res = await fetch(api.url, { signal: AbortSignal.timeout(5000) });
+      if (!res.ok) continue;
+      const data = await res.json();
+      const info = api.map(data);
+      if (info.erro) { status.textContent = 'CEP nao encontrado'; status.style.color = '#c0392b'; return; }
+      document.getElementById('clienteRua').value = info.rua || '';
+      document.getElementById('clienteBairro').value = info.bairro || '';
+      document.getElementById('clienteCidade').value = info.cidade || '';
+      document.getElementById('clienteUf').value = info.uf || '';
+      status.textContent = 'Endereco encontrado!';
+      status.style.color = 'var(--verde-medio)';
+      document.getElementById('clienteNumero').focus();
+      return;
+    } catch(e) { continue; }
+  }
+
+  // Se todas as APIs falharem, preenche cidade por faixa de CEP
+  status.textContent = 'Preencha o endereco manualmente';
+  status.style.color = '#c0392b';
+  const n = parseInt(cep);
+  const cidades = [
+    { min:12200000, max:12249999, cidade:'Sao Jose dos Campos', uf:'SP' },
+    { min:12250000, max:12299999, cidade:'Sao Jose dos Campos', uf:'SP' },
+    { min:01000000, max:09999999, cidade:'Sao Paulo', uf:'SP' },
+    { min:20000000, max:28999999, cidade:'Rio de Janeiro', uf:'RJ' },
+    { min:30000000, max:39999999, cidade:'Belo Horizonte', uf:'MG' },
+    { min:80000000, max:87999999, cidade:'Curitiba', uf:'PR' },
+    { min:90000000, max:99999999, cidade:'Porto Alegre', uf:'RS' },
+  ];
+  const match = cidades.find(c => n >= c.min && n <= c.max);
+  if (match) {
+    document.getElementById('clienteCidade').value = match.cidade;
+    document.getElementById('clienteUf').value = match.uf;
+    status.textContent = 'Preencha rua e bairro';
+    status.style.color = '#c0392b';
+  }
+}
+
+function toggleRetirada() {
+  const retirada = document.getElementById('retiradaLoja').checked;
+  document.getElementById('camposEntrega').style.display = retirada ? 'none' : 'block';
+}
+
 function pedirWhatsApp() {
   const itens = Object.values(carrinho);
   if (itens.length === 0) { alert('Adicione produtos ao carrinho primeiro!'); return; }
-  const lista = itens.map(i => `▪ ${i.nome} x${i.qty} — R$ ${(i.preco * i.qty).toFixed(2).replace('.',',')}`).join('\n');
-  const total = itens.reduce((s, i) => s + i.preco * i.qty, 0);
-  const msg = `Olá! Gostaria de fazer um pedido pelo site:\n\n${lista}\n\n*Total: R$ ${total.toFixed(2).replace('.',',')}*\n\nPoderia confirmar a disponibilidade e combinar a entrega?`;
+
+  const nome = document.getElementById('clienteNome').value.trim();
+  const retirada = document.getElementById('retiradaLoja').checked;
+  const cep = document.getElementById('clienteCep').value.trim();
+  const rua = document.getElementById('clienteRua').value.trim();
+  const numero = document.getElementById('clienteNumero').value.trim();
+  const complemento = document.getElementById('clienteComplemento').value.trim();
+  const bairro = document.getElementById('clienteBairro').value.trim();
+  const cidade = document.getElementById('clienteCidade').value.trim();
+  const uf = document.getElementById('clienteUf').value.trim();
+  const obs = document.getElementById('clienteObs').value.trim();
+
+  if (!nome) { alert('Por favor, informe seu nome.'); document.getElementById('clienteNome').focus(); return; }
+  if (!retirada) {
+    if (!cep) { alert('Por favor, informe o CEP.'); document.getElementById('clienteCep').focus(); return; }
+    if (!rua) { alert('Por favor, informe a rua.'); document.getElementById('clienteRua').focus(); return; }
+    if (!numero) { alert('Por favor, informe o numero.'); document.getElementById('clienteNumero').focus(); return; }
+  }
+
+  const lista = itens.map(i => `- ${i.nome} x${i.qty}  ->  R$ ${(i.preco * i.qty).toFixed(2).replace('.',',')}`).join('\n');
+  const subtotal = itens.reduce((s, i) => s + i.preco * i.qty, 0);
+  const complementoLinha = complemento ? `, ${complemento}` : '';
+  const enderecoCompleto = `${rua}, ${numero}${complementoLinha} - ${bairro}, ${cidade} - ${uf} - CEP: ${cep}`;
+
+  const entregaLinha = retirada
+    ? `*Entrega:* Retirada na loja - R. Santa Clara, 1050`
+    : `*Endereco:* ${enderecoCompleto}`;
+
+  const obsLinha = obs ? `\n*Obs:* ${obs}` : '';
+
+  const msg =
+`Ola, Santo Fausto! Gostaria de fazer um pedido pelo site.
+
+*Nome:* ${nome}
+
+*PEDIDO:*
+${lista}
+
+*Subtotal: R$ ${subtotal.toFixed(2).replace('.',',')}*
+(frete a combinar)
+
+${entregaLinha}${obsLinha}
+
+Poderia confirmar a disponibilidade e calcular o frete?`;
+
   window.open('https://wa.me/5512981844404?text=' + encodeURIComponent(msg), '_blank');
 }
 
