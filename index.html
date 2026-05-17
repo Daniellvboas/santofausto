@@ -31,9 +31,9 @@ body { font-family:'Jost',sans-serif; font-weight:300; color:var(--texto); backg
 .anuncio-item { display:flex; align-items:center; gap:0.4rem; opacity:0.92; }
 
 /* NAVBAR */
-nav { position:sticky; top:0; z-index:1000; background:rgba(247,243,237,0.97); backdrop-filter:blur(8px); border-bottom:1px solid rgba(74,124,74,0.15); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:88px; gap:1rem; }
+nav { position:sticky; top:0; z-index:1000; background:rgba(247,243,237,0.97); backdrop-filter:blur(8px); border-bottom:1px solid rgba(74,124,74,0.15); padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:100px; gap:1rem; }
 .nav-logo { text-decoration:none; display:flex; align-items:center; flex-shrink:0; }
-.nav-logo img { mix-blend-mode:multiply; height:68px; width:auto; display:block; }
+.nav-logo img { mix-blend-mode:multiply; height:80px; width:auto; display:block; }
 .nav-busca-wrap { position:relative; flex:1; max-width:260px; }
 .nav-busca-wrap input { width:100%; padding:0.45rem 0.9rem 0.45rem 2.2rem; border:1px solid rgba(74,124,74,0.25); border-radius:2px; font-family:'Jost',sans-serif; font-size:0.82rem; background:rgba(255,255,255,0.7); color:var(--texto); outline:none; transition:border-color 0.2s, background 0.2s; }
 .nav-busca-wrap input:focus { border-color:var(--verde-medio); background:white; }
@@ -258,7 +258,7 @@ footer a { color:var(--verde-claro); text-decoration:none; }
 @media (max-width:768px) {
   .nav-links { display:none; }
   .hamburger { display:flex; }
-  .nav-links.aberto { display:flex; flex-direction:column; position:fixed; top:80px; left:0; right:0; background:var(--creme); padding:1.5rem; border-bottom:1px solid rgba(74,124,74,0.15); gap:1.5rem; z-index:999; }
+  .nav-links.aberto { display:flex; flex-direction:column; position:fixed; top:92px; left:0; right:0; background:var(--creme); padding:1.5rem; border-bottom:1px solid rgba(74,124,74,0.15); gap:1.5rem; z-index:999; }
   #hero { padding-top:80px; min-height:auto; padding-bottom:3rem; }
   .hero-content { grid-template-columns:1fr; gap:2rem; }
   .hero-visual { display:none; }
