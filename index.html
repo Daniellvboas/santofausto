@@ -65,8 +65,18 @@ nav { position:sticky; top:0; z-index:1000; background:rgba(247,243,237,0.97); b
 .hamburger { display:none; background:none; border:none; cursor:pointer; flex-direction:column; gap:5px; }
 .hamburger span { display:block; width:22px; height:1.5px; background:var(--verde-escuro); }
 
+/* SEGUNDA NAVBAR — BUSCA */
+.nav-busca-fixa { position:sticky; top:80px; z-index:999; background:rgba(255,255,255,0.97); backdrop-filter:blur(8px); border-bottom:1px solid rgba(74,124,74,0.12); padding:0.55rem 2rem; display:flex; align-items:center; justify-content:center; }
+.nav-busca-fixa-inner { position:relative; width:100%; max-width:680px; }
+.nav-busca-fixa-inner input { width:100%; padding:0.6rem 1rem 0.6rem 2.6rem; border:1.5px solid rgba(74,124,74,0.22); border-radius:2px; font-family:'Jost',sans-serif; font-size:0.88rem; background:white; color:var(--texto); outline:none; transition:border-color 0.2s, box-shadow 0.2s; }
+.nav-busca-fixa-inner input:focus { border-color:var(--verde-medio); box-shadow:0 0 0 3px rgba(74,124,74,0.08); }
+.nav-busca-fixa-inner input::placeholder { color:var(--texto-suave); opacity:0.7; }
+.nav-busca-fixa-icone { position:absolute; left:0.75rem; top:50%; transform:translateY(-50%); font-size:0.85rem; color:var(--verde-medio); pointer-events:none; }
+.nav-busca-fixa-limpar { position:absolute; right:0.75rem; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:0.75rem; color:var(--texto-suave); padding:0; display:none; }
+.nav-busca-fixa-limpar.visivel { display:block; }
+
 /* HERO */
-#hero { min-height:88vh; display:flex; align-items:center; padding:80px 2rem 4rem; position:relative; overflow:hidden; }
+#hero { min-height:88vh; display:flex; align-items:center; padding:60px 2rem 4rem; position:relative; overflow:hidden; }
 .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 75% 50%, rgba(122,184,122,0.12) 0%, transparent 70%); }
 .hero-pattern { position:absolute; top:0; right:0; width:50%; height:100%; background-image:repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(74,124,74,0.04) 40px, rgba(74,124,74,0.04) 41px); }
 .hero-content { position:relative; z-index:1; max-width:1100px; margin:0 auto; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
@@ -289,10 +299,14 @@ footer a { color:var(--verde-claro); text-decoration:none; }
 
 /* MOBILE */
 @media (max-width:768px) {
+  .nav-busca-wrap { display:none; }
   .nav-links { display:none; }
+  .nav-logo img { height:52px; }
+  .nav-cart { padding:0.45rem 0.9rem; font-size:0.75rem; }
   .hamburger { display:flex; }
   .nav-links.aberto { display:flex; flex-direction:column; position:fixed; top:80px; left:0; right:0; background:var(--creme); padding:1.5rem; border-bottom:1px solid rgba(74,124,74,0.15); gap:1.5rem; z-index:999; }
-  #hero { padding-top:80px; min-height:auto; padding-bottom:3rem; }
+  .nav-busca-fixa { top:64px; padding:0.45rem 1rem; }
+  #hero { padding-top:60px; min-height:auto; padding-bottom:3rem; }
   .hero-content { grid-template-columns:1fr; gap:2rem; }
   .hero-visual { display:none; }
   .hero-cats-mobile { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.5rem; }
@@ -348,10 +362,6 @@ footer a { color:var(--verde-claro); text-decoration:none; }
     <li><a href="#historia" onclick="fecharMenu()">Nossa História</a></li>
     <li><a href="#contato" onclick="fecharMenu()">Contato</a></li>
   </ul>
-  <div class="nav-busca-wrap">
-    <span class="nav-busca-icone">🔍</span>
-    <input type="text" placeholder="Buscar produto..." oninput="buscarProdutoNav(this.value)" id="navBuscaInput">
-  </div>
   <div style="display:flex;gap:0.8rem;align-items:center;">
     <button class="nav-cart" onclick="toggleCarrinho()">
       🛒 Carrinho <span class="cart-badge" id="cartBadge">0</span>
@@ -361,6 +371,15 @@ footer a { color:var(--verde-claro); text-decoration:none; }
     </button>
   </div>
 </nav>
+
+<!-- SEGUNDA NAVBAR — BUSCA FIXA -->
+<div class="nav-busca-fixa" id="navBuscaFixa">
+  <div class="nav-busca-fixa-inner">
+    <span class="nav-busca-fixa-icone">🔍</span>
+    <input type="text" id="navBuscaInput" placeholder="Buscar produto... ex: sabonete, óleo, lavanda" oninput="buscarProdutoNav(this.value)" autocomplete="off">
+    <button class="nav-busca-fixa-limpar" id="navBuscaLimpar" onclick="limparBusca()" title="Limpar busca">✕</button>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -919,6 +938,9 @@ function buscarProduto(q) {
 }
 
 function buscarProdutoNav(q) {
+  // Botão de limpar
+  const limpar = document.getElementById('navBuscaLimpar');
+  if (limpar) limpar.classList.toggle('visivel', q.trim().length > 0);
   // Sincroniza com o campo de busca da seção de produtos
   const buscaInput = document.getElementById('buscaInput');
   if (buscaInput) buscaInput.value = q;
@@ -928,7 +950,19 @@ function buscarProdutoNav(q) {
     document.querySelectorAll('.filtro-btn').forEach(b=>b.classList.remove('ativo'));
     document.querySelector('.filtro-btn')?.classList.add('ativo');
     renderProdutos(null, q);
+  } else {
+    renderProdutos(null, '');
   }
+}
+
+function limparBusca() {
+  const input = document.getElementById('navBuscaInput');
+  if (input) { input.value = ''; input.focus(); }
+  const limpar = document.getElementById('navBuscaLimpar');
+  if (limpar) limpar.classList.remove('visivel');
+  const buscaInput = document.getElementById('buscaInput');
+  if (buscaInput) buscaInput.value = '';
+  renderProdutos(null, '');
 }
 
 function irParaCategoria(cat) {
