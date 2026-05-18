@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Santo Fausto Produtos Naturais — São José dos Campos</title>
 <meta name="description" content="Produtos naturais e artesanais feitos à mão em São José dos Campos. Sabonetes, óleos essenciais, shampoos, cosméticos 100% vegetais, veganos e sem parabenos.">
+
+<!-- Open Graph — compartilhamento no WhatsApp e Instagram -->
+<meta property="og:title" content="Santo Fausto Produtos Naturais">
+<meta property="og:description" content="Cosméticos artesanais 100% vegetais, feitos à mão em São José dos Campos. Sabonetes, óleos, shampoos, lip balm e muito mais. Sem parabenos, sem testes em animais.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.santofausto.com.br">
+<meta property="og:site_name" content="Santo Fausto Produtos Naturais">
+<meta property="og:locale" content="pt_BR">
+<!-- WhatsApp usa og:image — mínimo 300x200px, ideal 1200x630px -->
+<meta property="og:image" content="https://santofausto.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Santo Fausto Produtos Naturais — Cosméticos artesanais feitos à mão em SJC">
+<!-- Twitter Card (também usado por alguns apps) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Santo Fausto Produtos Naturais">
+<meta name="twitter:description" content="Cosméticos artesanais 100% vegetais, feitos à mão em São José dos Campos.">
+<meta name="twitter:image" content="https://santofausto.vercel.app/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -24,7 +42,7 @@
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { font-family:'Jost',sans-serif; font-weight:300; color:var(--texto); background:var(--creme); overflow-x:hidden; }
+body { font-family:'Jost',sans-serif; font-weight:400; color:var(--texto); background:var(--creme); overflow-x:hidden; }
 
 /* ANUNCIO TOPO */
 .anuncio-topo { background:var(--verde-escuro); color:white; padding:0.55rem 1rem; font-size:0.78rem; font-weight:400; letter-spacing:0.06em; display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
@@ -103,7 +121,6 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.6rem); f
 .busca-input { width:100%; padding:0.8rem 1rem 0.8rem 2.6rem; border:1px solid rgba(74,124,74,0.3); border-radius:2px; font-family:'Jost',sans-serif; font-size:0.9rem; background:white; color:var(--texto); outline:none; transition:border-color 0.2s; }
 .busca-input:focus { border-color:var(--verde-medio); }
 .busca-icone { position:absolute; left:0.8rem; top:50%; transform:translateY(-50%); color:var(--verde-medio); pointer-events:none; }
-.frete-aviso-topo { background:#fffbf0; border-bottom:1px solid #e8d5a0; padding:0.6rem 2rem; display:flex; align-items:center; justify-content:center; gap:0.8rem; font-size:0.82rem; color:#6b4f3a; line-height:1.5; position:sticky; top:80px; z-index:999; }
 .filtros { display:flex; gap:0.5rem; flex-wrap:wrap; justify-content:center; margin-bottom:2rem; }
 .filtro-btn { background:transparent; border:1px solid rgba(74,124,74,0.3); color:var(--texto-suave); padding:0.45rem 1rem; border-radius:2px; font-family:'Jost',sans-serif; font-size:0.75rem; font-weight:400; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; transition:all 0.2s; }
 .filtro-btn:hover, .filtro-btn.ativo { background:var(--verde-escuro); border-color:var(--verde-escuro); color:white; }
@@ -215,7 +232,7 @@ footer a { color:var(--verde-claro); text-decoration:none; }
 .entrega-titulo { font-size:0.75rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--verde-escuro); margin-bottom:0.8rem; }
 .entrega-campo { margin-bottom:0.6rem; }
 .entrega-campo label { display:block; font-size:0.72rem; font-weight:500; color:var(--verde-escuro); margin-bottom:0.25rem; letter-spacing:0.06em; text-transform:uppercase; }
-.entrega-campo input { width:100%; background:white; border:1px solid rgba(74,124,74,0.25); border-radius:2px; padding:0.55rem 0.8rem; font-family:'Jost',sans-serif; font-size:0.88rem; font-weight:300; color:var(--texto); outline:none; transition:border-color 0.2s; }
+.entrega-campo input { width:100%; background:white; border:1px solid rgba(74,124,74,0.25); border-radius:2px; padding:0.55rem 0.8rem; font-family:'Jost',sans-serif; font-size:0.88rem; font-weight:400; color:var(--texto); outline:none; transition:border-color 0.2s; }
 .entrega-campo input:focus { border-color:var(--verde-medio); }
 .entrega-campo input::placeholder { color:#aaa; }
 .entrega-retirada { display:flex; align-items:center; gap:0.5rem; margin-top:0.5rem; cursor:pointer; }
@@ -228,6 +245,8 @@ footer a { color:var(--verde-claro); text-decoration:none; }
 .btn-pedir-wpp { width:100%; background:#25d366; color:white; border:none; cursor:pointer; padding:1rem; border-radius:4px; font-family:'Jost',sans-serif; font-size:0.9rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:0.7rem; transition:background 0.2s,transform 0.15s; }
 .btn-pedir-wpp:hover { background:#1db954; transform:translateY(-1px); }
 .cart-aviso { font-size:0.72rem; color:var(--texto-suave); text-align:center; margin-top:0.8rem; line-height:1.5; }
+.frete-aviso-carrinho { background:#fffbf0; border:1px solid #e8d5a0; border-radius:4px; padding:0.65rem 0.9rem; display:flex; align-items:flex-start; gap:0.6rem; font-size:0.78rem; color:#6b4f3a; line-height:1.5; margin-bottom:0.8rem; }
+.frete-aviso-carrinho span:first-child { flex-shrink:0; font-size:0.9rem; margin-top:1px; }
 
 /* MODAL */
 .modal-overlay { position:fixed; inset:0; z-index:3000; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; padding:1rem; }
@@ -277,6 +296,7 @@ footer a { color:var(--verde-claro); text-decoration:none; }
   .strip { gap:1.2rem; padding:0.8rem 1rem; }
   .depoimentos-grid { grid-template-columns:1fr; }
   .modal-box { max-height:95vh; }
+  .btn-add { width:44px; height:44px; }
 }
 </style>
 </head>
@@ -324,12 +344,6 @@ footer a { color:var(--verde-claro); text-decoration:none; }
     </button>
   </div>
 </nav>
-
-<!-- AVISO FRETE -->
-<div class="frete-aviso-topo">
-  <span style="font-size:1rem;flex-shrink:0;">🚚</span>
-  <span><strong>Sobre o frete:</strong> O valor é calculado após o pedido, pois varia conforme o bairro, cidade, peso e horário de entrega. Entregamos via Uber Flash, Correios ou retirada na loja. Você receberá o valor exato pelo WhatsApp antes de confirmar.</span>
-</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -672,6 +686,10 @@ footer a { color:var(--verde-claro); text-decoration:none; }
     </div>
   </div>
   <div class="cart-footer">
+    <div class="frete-aviso-carrinho">
+      <span>🚚</span>
+      <span><strong>Sobre o frete:</strong> Calculado após o pedido via WhatsApp — varia por bairro, cidade e peso. Entregamos via Uber Flash, Correios ou retirada grátis na loja.</span>
+    </div>
     <div class="cart-total">
       <span>Subtotal dos produtos</span>
       <strong id="cartTotal">R$ 0,00</strong>
