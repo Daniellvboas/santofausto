@@ -151,7 +151,7 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.6rem); f
 .depoimento-texto { font-family:'Playfair Display',serif; font-size:0.95rem; font-style:italic; color:var(--texto); line-height:1.7; flex:1; }
 .depoimento-texto::before { content:'"'; font-size:2rem; color:var(--verde-claro); line-height:0; vertical-align:-0.5rem; margin-right:2px; }
 .depoimento-autor { display:flex; align-items:center; gap:0.8rem; padding-top:1rem; border-top:1px solid var(--creme-escuro); }
-.depoimento-avatar { width:40px; height:40px; border-radius:50%; background:var(--verde-palido); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+.depoimento-avatar { width:40px; height:40px; border-radius:50%; background:var(--verde-medio); display:flex; align-items:center; justify-content:center; font-size:1rem; font-weight:500; color:white; font-family:'Jost',sans-serif; flex-shrink:0; }
 .depoimento-nome { font-size:0.85rem; font-weight:500; color:var(--verde-escuro); }
 .depoimento-produto { font-size:0.72rem; color:var(--texto-suave); margin-top:2px; }
 .depoimento-selo { display:inline-flex; align-items:center; gap:0.4rem; background:var(--verde-palido); color:var(--verde-escuro); font-size:0.68rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; padding:0.25rem 0.7rem; border-radius:2px; margin-top:0.5rem; align-self:flex-start; }
@@ -283,6 +283,9 @@ footer a { color:var(--verde-claro); text-decoration:none; }
 
 .mais-vendidos-grid { display:flex; flex-wrap:wrap; gap:1.2rem; margin-bottom:1rem; justify-content:center; }
 .mais-vendidos-grid .produto-card { width:175px; flex-shrink:0; }
+
+.btn-instagram { display:inline-flex; align-items:center; gap:0.6rem; background:white; color:var(--verde-escuro); border:none; padding:0.75rem 1.8rem; border-radius:2px; font-family:'Jost',sans-serif; font-size:0.9rem; font-weight:500; letter-spacing:0.06em; cursor:pointer; text-decoration:none; transition:background 0.2s, transform 0.15s; }
+.btn-instagram:hover { background:var(--creme); transform:translateY(-1px); }
 
 /* MOBILE */
 @media (max-width:768px) {
@@ -461,51 +464,66 @@ footer a { color:var(--verde-claro); text-decoration:none; }
   <div class="section-header">
     <div class="section-eyebrow">Quem já usou, aprovou</div>
     <h2>O que nossos clientes dizem</h2>
-    <p class="section-desc">Depoimentos reais de quem já experimentou e voltou para contar.</p>
+    <p class="section-desc">Avaliações reais do Google — 4,6 ⭐ com 10 avaliações.</p>
   </div>
   <div class="depoimentos-grid">
+
     <div class="depoimento-card">
       <div class="depoimento-estrelas">★★★★★</div>
-      <div class="depoimento-texto">Uso o hidratante íntimo há 6 meses e foi o único produto que realmente resolveu minha sensibilidade. Minha ginecologista até pediu o nome da marca!</div>
+      <div class="depoimento-texto">A loja fica em um bairro charmoso, em uma casinha lilás, com plantinhas. Lá dentro somos recebidos pelo simpático casal Fausto e Laura, que nos apresentam uma série de bons produtos. Particularmente adoro o óleo essencial de lavanda e os sabonetes por eles produzidos. São muito bons. As bijus são lindas. Vale a pena conferir.</div>
       <div class="depoimento-autor">
-        <div class="depoimento-avatar">👩</div>
+        <div class="depoimento-avatar">G</div>
         <div>
-          <div class="depoimento-nome">Ana Carolina S.</div>
-          <div class="depoimento-produto">Hidratante Íntimo Barbatimão</div>
-          <div class="depoimento-selo">✓ Compra verificada</div>
+          <div class="depoimento-nome">Goretti</div>
+          <div class="depoimento-produto">Local Guide · 403 avaliações</div>
+          <div class="depoimento-selo">⭐ Google Maps</div>
         </div>
       </div>
     </div>
+
     <div class="depoimento-card">
       <div class="depoimento-estrelas">★★★★★</div>
-      <div class="depoimento-texto">Os sabonetes são incríveis! Minha pele nunca foi tão hidratada. Abandonei de vez os sabonetes industriais. O cheiro é delicioso e dura muito mais do que parece.</div>
+      <div class="depoimento-texto">Produtos de ótima qualidade, conheci a loja e adorei, a família toda já conhece, atendimento excelente. Meu filho atualmente está usando a "fórmula da confiança", recomendo!</div>
       <div class="depoimento-autor">
-        <div class="depoimento-avatar">👩</div>
+        <div class="depoimento-avatar" style="background:#4285F4;">E</div>
         <div>
-          <div class="depoimento-nome">Patricia M.</div>
-          <div class="depoimento-produto">Sabonete Lavanda & Melaleuca</div>
-          <div class="depoimento-selo">✓ Compra verificada</div>
+          <div class="depoimento-nome">Eda Gomes</div>
+          <div class="depoimento-produto">Local Guide · 14 avaliações</div>
+          <div class="depoimento-selo">⭐ Google Maps</div>
         </div>
       </div>
     </div>
+
     <div class="depoimento-card">
       <div class="depoimento-estrelas">★★★★★</div>
-      <div class="depoimento-texto">Comprei o óleo antidor para minha mãe que tem dores nas costas. Ela adorou tanto que agora pede de presente. Muito obrigada pelo cuidado que vocês colocam em cada produto!</div>
+      <div class="depoimento-texto">Santo Fausto é uma loja excelente com ótimos produtos. Sempre fui extremamente bem atendido e tratado pelos proprietários. Agradeço o carinho e com certeza voltarei!</div>
       <div class="depoimento-autor">
-        <div class="depoimento-avatar">👩</div>
+        <div class="depoimento-avatar" style="background:#EA4335;">G</div>
         <div>
-          <div class="depoimento-nome">Juliana R.</div>
-          <div class="depoimento-produto">Óleo Antidor para Massagem</div>
-          <div class="depoimento-selo">✓ Compra verificada</div>
+          <div class="depoimento-nome">Gabriel Colomer</div>
+          <div class="depoimento-produto">4 avaliações no Google</div>
+          <div class="depoimento-selo">⭐ Google Maps</div>
         </div>
       </div>
     </div>
+
   </div>
   <div style="text-align:center;margin-top:2rem;">
     <a href="https://g.page/r/CZIh4Z8Ls5GfEBM/review" target="_blank" class="btn-outline" style="display:inline-flex;align-items:center;gap:0.5rem;">
       ⭐ Deixe também sua avaliação no Google
     </a>
   </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="instagram" style="background:var(--verde-escuro);padding:3rem 2rem;text-align:center;">
+  <div class="section-eyebrow" style="color:rgba(255,255,255,0.6);">Nos acompanhe</div>
+  <h2 style="color:white;margin-bottom:0.5rem;">@santofaustosjc</h2>
+  <p style="color:rgba(255,255,255,0.75);font-size:0.95rem;max-width:480px;margin:0 auto 1.8rem;">Bastidores da produção, novidades, dicas de aromaterapia e muito mais. Siga a gente no Instagram!</p>
+  <a href="https://instagram.com/santofaustosjc" target="_blank" class="btn-instagram">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    Seguir no Instagram
+  </a>
 </section>
 
 <!-- BASTIDORES -->
@@ -1076,7 +1094,7 @@ async function buscarCep() {
   }
   try {
     const r=await fetch('https://viacep.com.br/ws/'+cep+'/json/',{signal:AbortSignal.timeout(8000)});
-    if(r.ok){const d=await r.json();if(!d.erro){preencher(d.logradouro,d.bairro,d.localidade,d.uf);return;}else{status.textContent='CEP não encontrado';status.style.color='#c0392b';return;}}
+    if(r.ok){const d=await r.json();if(!d.erro){preencher(d.logradouro,d.bairro,d.localidade,d.uf);return;}else{status.textContent='CEP não encontrado — preencha o endereço manualmente';status.style.color='#c0392b';return;}}
   }catch(e){}
   try {
     const r=await fetch('https://brasilapi.com.br/api/cep/v2/'+cep,{signal:AbortSignal.timeout(8000)});
@@ -1086,7 +1104,7 @@ async function buscarCep() {
     const r=await fetch('https://opencep.com/v1/'+cep,{signal:AbortSignal.timeout(8000)});
     if(r.ok){const d=await r.json();if(d.cep){preencher(d.logradouro,d.bairro,d.localidade,d.uf);return;}}
   }catch(e){}
-  status.textContent='Preencha o endereço manualmente'; status.style.color='#c0392b';
+  status.textContent='Preencha o endereço manualmente abaixo 👇'; status.style.color='#c0392b';
 }
 
 function toggleRetirada() {
