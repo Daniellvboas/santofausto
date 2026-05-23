@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://santofausto.vercel.app/sitemap.xml
