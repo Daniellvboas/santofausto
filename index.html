@@ -292,8 +292,39 @@ footer a { color:var(--verde-claro); text-decoration:none; }
 .cart-voltar:hover { background:rgba(74,124,74,0.1); }
 .cart-step-indicator { font-size:0.72rem; color:var(--texto-suave); text-align:center; padding:0.3rem 0 0.1rem; }
 
-.mais-vendidos-grid { display:flex; flex-wrap:wrap; gap:1.2rem; margin-bottom:1rem; justify-content:center; }
-.mais-vendidos-grid .produto-card { width:175px; flex-shrink:0; }
+/* Resumo compacto dos itens na etapa 2 (item 6) */
+.cart-resumo { background:white; border:1px solid rgba(74,124,74,0.12); border-radius:4px; padding:0.85rem 1rem; margin:0 1.5rem 0.8rem; flex-shrink:0; }
+.cart-resumo-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; padding-bottom:0.5rem; border-bottom:1px solid rgba(74,124,74,0.08); }
+.cart-resumo-titulo { font-family:'Jost',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--verde-escuro); font-weight:500; }
+.cart-resumo-editar { font-size:0.72rem; color:var(--verde-medio); background:none; border:none; cursor:pointer; font-family:'Jost',sans-serif; text-decoration:underline; padding:0; }
+.cart-resumo-editar:hover { color:var(--verde-escuro); }
+.cart-resumo-itens { display:flex; flex-direction:column; gap:0.35rem; max-height:140px; overflow-y:auto; }
+.cart-resumo-item { display:flex; justify-content:space-between; gap:0.6rem; font-size:0.8rem; color:var(--texto); line-height:1.4; }
+.cart-resumo-item-nome { flex:1; min-width:0; }
+.cart-resumo-item-qty { color:var(--texto-suave); font-size:0.75rem; flex-shrink:0; }
+.cart-resumo-item-preco { color:var(--verde-escuro); font-weight:500; white-space:nowrap; flex-shrink:0; }
+
+/* Preview da mensagem WhatsApp (item 8) */
+.cart-preview-msg { background:#f7f3ed; border:1px solid #e0d8c8; border-radius:4px; padding:1rem 1.1rem; margin:0 1.5rem 0.8rem; flex:1; min-height:0; overflow-y:auto; font-family:'Jost',sans-serif; font-size:0.82rem; line-height:1.55; color:#3a3a3a; white-space:pre-wrap; word-wrap:break-word; }
+.cart-preview-info { padding:0 1.5rem; flex-shrink:0; font-size:0.78rem; color:var(--texto-suave); line-height:1.5; margin-bottom:0.5rem; text-align:center; }
+.btn-editar-pedido { background:transparent; color:var(--verde-escuro); border:1px solid var(--verde-medio); padding:0.8rem; border-radius:4px; cursor:pointer; font-family:'Jost',sans-serif; font-size:0.85rem; font-weight:500; letter-spacing:0.06em; transition:all 0.2s; width:100%; margin-bottom:0.5rem; }
+.btn-editar-pedido:hover { background:rgba(74,124,74,0.08); }
+
+/* Faixa de preço por categoria (item 11) */
+.precos-strip { background:var(--creme-escuro); padding:1.6rem 2rem; border-top:1px solid rgba(74,124,74,0.08); border-bottom:1px solid rgba(74,124,74,0.08); }
+.precos-strip-inner { max-width:1100px; margin:0 auto; }
+.precos-strip-titulo { font-family:'Jost',sans-serif; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.18em; color:var(--verde-escuro); text-align:center; margin-bottom:1rem; font-weight:500; }
+.precos-strip-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:1rem 1.5rem; }
+.preco-faixa { text-align:center; }
+.preco-faixa-cat { font-family:'Jost',sans-serif; font-size:0.78rem; color:var(--texto-suave); margin-bottom:0.2rem; }
+.preco-faixa-valor { font-family:'Playfair Display',serif; font-size:1rem; color:var(--verde-escuro); font-weight:400; }
+.preco-faixa-valor strong { font-weight:500; }
+.preco-faixa-valor small { font-size:0.7rem; color:var(--texto-suave); font-family:'Jost',sans-serif; display:block; margin-top:0.1rem; }
+@media (max-width:600px) { .precos-strip-grid { grid-template-columns:repeat(2, 1fr); gap:1rem 0.8rem; } .precos-strip { padding:1.4rem 1rem; } }
+
+.mais-vendidos-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:1.2rem; margin-bottom:1rem; max-width:1200px; margin-left:auto; margin-right:auto; }
+.mais-vendidos-grid .produto-card { width:auto; flex-shrink:0; }
+@media (max-width:480px) { .mais-vendidos-grid { grid-template-columns:repeat(2, 1fr); gap:0.8rem; } }
 
 .btn-instagram { display:inline-flex; align-items:center; gap:0.6rem; background:white; color:var(--verde-escuro); border:none; padding:0.75rem 1.8rem; border-radius:2px; font-family:'Jost',sans-serif; font-size:0.9rem; font-weight:500; letter-spacing:0.06em; cursor:pointer; text-decoration:none; transition:background 0.2s, transform 0.15s; }
 .btn-instagram:hover { background:var(--creme); transform:translateY(-1px); }
@@ -512,6 +543,39 @@ input:focus-visible, textarea:focus-visible { outline:none; }
   <div class="strip-item">Entrega em SJC e Brasil</div>
 </div>
 
+<!-- FAIXA DE PREÇOS (item 11) -->
+<div class="precos-strip">
+  <div class="precos-strip-inner">
+    <div class="precos-strip-titulo">A partir de</div>
+    <div class="precos-strip-grid">
+      <div class="preco-faixa">
+        <div class="preco-faixa-cat">Sabonetes</div>
+        <div class="preco-faixa-valor"><small>R$</small> <strong>22</strong></div>
+      </div>
+      <div class="preco-faixa">
+        <div class="preco-faixa-cat">Óleos Essenciais</div>
+        <div class="preco-faixa-valor"><small>R$</small> <strong>33</strong></div>
+      </div>
+      <div class="preco-faixa">
+        <div class="preco-faixa-cat">Hidratantes</div>
+        <div class="preco-faixa-valor"><small>R$</small> <strong>48</strong></div>
+      </div>
+      <div class="preco-faixa">
+        <div class="preco-faixa-cat">Cabelos</div>
+        <div class="preco-faixa-valor"><small>R$</small> <strong>48</strong></div>
+      </div>
+      <div class="preco-faixa">
+        <div class="preco-faixa-cat">Aromaterapia</div>
+        <div class="preco-faixa-valor"><small>R$</small> <strong>27</strong></div>
+      </div>
+      <div class="preco-faixa">
+        <div class="preco-faixa-cat">Acessórios</div>
+        <div class="preco-faixa-valor"><small>R$</small> <strong>7</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- POR QUE SANTO FAUSTO -->
 <section id="porque">
   <div class="section-header">
@@ -671,12 +735,12 @@ input:focus-visible, textarea:focus-visible { outline:none; }
       <div class="entrega-info-icone">🚚</div>
       <div class="entrega-info-titulo">Como funciona a entrega</div>
       <ul class="entrega-info-lista">
-        <li>Entrega em São José dos Campos e região</li>
-        <li>Envio para todo o Brasil pelos Correios (PAC e SEDEX)</li>
-        <li>Entrega rápida via Uber Flash em SJC</li>
-        <li>Retirada gratuita na loja — R. Santa Clara, 1050</li>
-        <li>Frete calculado após o pedido e informado pelo WhatsApp</li>
+        <li><strong>SJC e região:</strong> Uber Flash — a partir de R$ 15</li>
+        <li><strong>Outras cidades:</strong> Correios (PAC ou SEDEX) — a partir de R$ 20</li>
+        <li><strong>Retirada na loja:</strong> Grátis — R. Santa Clara, 1050</li>
+        <li>Valor final confirmado por WhatsApp conforme bairro, peso e modalidade</li>
       </ul>
+      <p style="font-size:0.72rem;color:var(--texto-suave);margin-top:0.6rem;font-style:italic;line-height:1.5;">* Valores aproximados — o frete exato é calculado e confirmado após o pedido.</p>
     </div>
     <div class="entrega-info-card">
       <div class="entrega-info-icone">💳</div>
@@ -801,7 +865,7 @@ input:focus-visible, textarea:focus-visible { outline:none; }
     <div class="cart-footer">
       <div class="frete-aviso-carrinho">
         <span>🚚</span>
-        <span><strong>Sobre o frete:</strong> Calculado após o pedido via WhatsApp — varia por bairro, cidade e peso. Entregamos via Uber Flash, Correios ou retirada grátis na loja.</span>
+        <span><strong>Frete:</strong> Uber Flash em SJC (a partir de R$ 15) · Correios para outras cidades (a partir de R$ 20) · Retirada grátis na loja. Valor exato confirmado por WhatsApp.</span>
       </div>
       <div class="cart-total">
         <span>Subtotal dos produtos</span>
@@ -815,35 +879,43 @@ input:focus-visible, textarea:focus-visible { outline:none; }
 
   <!-- ETAPA 2: Formulário de entrega -->
   <div id="cartEtapa2" style="display:none;flex-direction:column;flex:1;min-height:0;">
+    <!-- Resumo dos itens (item 6) -->
+    <div class="cart-resumo" id="cartResumo">
+      <div class="cart-resumo-header">
+        <span class="cart-resumo-titulo">Seu pedido</span>
+        <button type="button" class="cart-resumo-editar" onclick="voltarEtapa()">Editar</button>
+      </div>
+      <div class="cart-resumo-itens" id="cartResumoItens"></div>
+    </div>
     <div class="entrega-form" id="entregaForm">
       <div class="entrega-titulo">Dados para entrega</div>
       <div class="entrega-campo">
         <label>Seu nome</label>
-        <input type="text" id="clienteNome" placeholder="Ex: Maria Silva" maxlength="80">
+        <input type="text" id="clienteNome" placeholder="Ex: Maria Silva" maxlength="80" autocomplete="name" required>
       </div>
       <div id="camposEntrega">
         <div class="entrega-campo">
           <label>CEP</label>
           <div style="display:flex;gap:0.5rem;align-items:center;">
-            <input type="text" id="clienteCep" placeholder="Ex: 12243-630" maxlength="9" oninput="formatarCep(this)" onblur="buscarCep()" onkeydown="if(event.key==='Enter'){event.preventDefault();buscarCep();}">
-            <span id="cepStatus" style="font-size:0.75rem;white-space:nowrap;"></span>
+            <input type="text" id="clienteCep" placeholder="Ex: 12243-630" maxlength="9" inputmode="numeric" autocomplete="postal-code" oninput="formatarCep(this)" onblur="buscarCep()" onkeydown="if(event.key==='Enter'){event.preventDefault();buscarCep();}">
+            <span id="cepStatus" style="font-size:0.75rem;white-space:nowrap;" aria-live="polite"></span>
           </div>
         </div>
         <div class="entrega-campo">
           <label>Rua / Avenida</label>
-          <input type="text" id="clienteRua" placeholder="Preenchido pelo CEP">
+          <input type="text" id="clienteRua" placeholder="Preenchido pelo CEP" autocomplete="address-line1">
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">
-          <div class="entrega-campo"><label>Número</label><input type="text" id="clienteNumero" placeholder="Ex: 123" maxlength="10"></div>
-          <div class="entrega-campo"><label>Complemento</label><input type="text" id="clienteComplemento" placeholder="Apto, Casa..." maxlength="40"></div>
+          <div class="entrega-campo"><label>Número</label><input type="text" id="clienteNumero" placeholder="Ex: 123" maxlength="10" inputmode="numeric" autocomplete="address-line2"></div>
+          <div class="entrega-campo"><label>Complemento</label><input type="text" id="clienteComplemento" placeholder="Apto, Casa..." maxlength="40" autocomplete="address-line3"></div>
         </div>
         <div class="entrega-campo">
           <label>Bairro</label>
-          <input type="text" id="clienteBairro" placeholder="Preenchido pelo CEP">
+          <input type="text" id="clienteBairro" placeholder="Preenchido pelo CEP" autocomplete="address-level3">
         </div>
         <div style="display:grid;grid-template-columns:1fr 0.4fr;gap:0.5rem;">
-          <div class="entrega-campo"><label>Cidade</label><input type="text" id="clienteCidade" placeholder="Preenchido pelo CEP"></div>
-          <div class="entrega-campo"><label>UF</label><input type="text" id="clienteUf" placeholder="SP" maxlength="2"></div>
+          <div class="entrega-campo"><label>Cidade</label><input type="text" id="clienteCidade" placeholder="Preenchido pelo CEP" autocomplete="address-level2"></div>
+          <div class="entrega-campo"><label>UF</label><input type="text" id="clienteUf" placeholder="SP" maxlength="2" autocomplete="address-level1" style="text-transform:uppercase;"></div>
         </div>
       </div>
       <label class="entrega-retirada">
@@ -860,9 +932,22 @@ input:focus-visible, textarea:focus-visible { outline:none; }
         <span>Subtotal dos produtos</span>
         <strong id="cartTotal2">R$ 0,00</strong>
       </div>
-      <button class="btn-pedir-wpp" onclick="pedirWhatsApp()">
+      <button class="btn-pedir-wpp" onclick="prepararPreview()" style="background:var(--verde-escuro);">
+        Revisar pedido →
+      </button>
+      <p class="cart-aviso">Você verá a mensagem completa antes de enviar.</p>
+    </div>
+  </div>
+
+  <!-- ETAPA 3: Preview da mensagem (item 8) -->
+  <div id="cartEtapa3" style="display:none;flex-direction:column;flex:1;min-height:0;">
+    <p class="cart-preview-info">Confira a mensagem que será enviada para o WhatsApp do Santo Fausto.</p>
+    <div class="cart-preview-msg" id="cartPreviewMsg" aria-label="Prévia da mensagem do WhatsApp"></div>
+    <div class="cart-footer">
+      <button type="button" class="btn-editar-pedido" onclick="voltarParaForm()">← Editar pedido</button>
+      <button class="btn-pedir-wpp" onclick="enviarPedidoFinal()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Enviar pedido pelo WhatsApp
+        Enviar pelo WhatsApp
       </button>
       <p class="cart-aviso">Após enviar, o Santo Fausto calcula o frete e confirma a disponibilidade.</p>
     </div>
@@ -1176,16 +1261,34 @@ function avancarEtapa() {
   if(itens.length === 0) { alert('Adicione produtos ao carrinho primeiro!'); return; }
   document.getElementById('cartEtapa1').style.display = 'none';
   document.getElementById('cartEtapa2').style.display = 'flex';
+  document.getElementById('cartEtapa3').style.display = 'none';
   document.getElementById('cartVoltar').style.display = 'flex';
   document.getElementById('cartTitulo').textContent = 'Dados de entrega';
   const subtotal = itens.reduce((s,i) => s + i.preco * i.qty, 0);
   document.getElementById('cartTotal2').textContent = 'R$ ' + subtotal.toFixed(2).replace('.', ',');
+  renderResumoItens();
+}
+function renderResumoItens() {
+  const itens = Object.values(carrinho);
+  document.getElementById('cartResumoItens').innerHTML = itens.map(i =>
+    '<div class="cart-resumo-item">'
+    + '<span class="cart-resumo-item-nome">' + i.nome + '</span>'
+    + '<span class="cart-resumo-item-qty">×' + i.qty + '</span>'
+    + '<span class="cart-resumo-item-preco">R$ ' + (i.preco * i.qty).toFixed(2).replace('.', ',') + '</span>'
+    + '</div>'
+  ).join('');
 }
 function voltarEtapa() {
+  document.getElementById('cartEtapa3').style.display = 'none';
   document.getElementById('cartEtapa2').style.display = 'none';
   document.getElementById('cartEtapa1').style.display = 'flex';
   document.getElementById('cartVoltar').style.display = 'none';
   document.getElementById('cartTitulo').textContent = 'Seu Carrinho';
+}
+function voltarParaForm() {
+  document.getElementById('cartEtapa3').style.display = 'none';
+  document.getElementById('cartEtapa2').style.display = 'flex';
+  document.getElementById('cartTitulo').textContent = 'Dados de entrega';
 }
 
 function toggleCarrinho() {
@@ -1246,32 +1349,56 @@ function toggleRetirada() {
 }
 
 function pedirWhatsApp() {
-  const itens=Object.values(carrinho);
-  if(itens.length===0){alert('Adicione produtos ao carrinho primeiro!');return;}
-  const nome=document.getElementById('clienteNome').value.trim();
-  const ret=document.getElementById('retiradaLoja').checked;
-  const cep=document.getElementById('clienteCep').value.trim();
-  const rua=document.getElementById('clienteRua').value.trim();
-  const numero=document.getElementById('clienteNumero').value.trim();
-  const complemento=document.getElementById('clienteComplemento').value.trim();
-  const bairro=document.getElementById('clienteBairro').value.trim();
-  const cidade=document.getElementById('clienteCidade').value.trim();
-  const uf=document.getElementById('clienteUf').value.trim();
-  const obs=document.getElementById('clienteObs').value.trim();
-  if(!nome){alert('Por favor, informe seu nome.');document.getElementById('clienteNome').focus();return;}
-  if(!ret){
-    if(!cep){alert('Por favor, informe o CEP.');document.getElementById('clienteCep').focus();return;}
-    if(!rua){alert('Por favor, informe a rua.');document.getElementById('clienteRua').focus();return;}
-    if(!numero){alert('Por favor, informe o número.');document.getElementById('clienteNumero').focus();return;}
+  const m = construirMensagem();
+  if (!m) return;
+  window.open('https://wa.me/5512981844404?text=' + encodeURIComponent(m), '_blank');
+}
+
+// Construção da mensagem (compartilhada entre preview e envio)
+function construirMensagem() {
+  const itens = Object.values(carrinho);
+  if (itens.length === 0) { alert('Adicione produtos ao carrinho primeiro!'); return null; }
+  const nome = document.getElementById('clienteNome').value.trim();
+  const ret = document.getElementById('retiradaLoja').checked;
+  const cep = document.getElementById('clienteCep').value.trim();
+  const rua = document.getElementById('clienteRua').value.trim();
+  const numero = document.getElementById('clienteNumero').value.trim();
+  const complemento = document.getElementById('clienteComplemento').value.trim();
+  const bairro = document.getElementById('clienteBairro').value.trim();
+  const cidade = document.getElementById('clienteCidade').value.trim();
+  const uf = document.getElementById('clienteUf').value.trim();
+  const obs = document.getElementById('clienteObs').value.trim();
+  if (!nome) { alert('Por favor, informe seu nome.'); document.getElementById('clienteNome').focus(); return null; }
+  if (!ret) {
+    if (!cep) { alert('Por favor, informe o CEP.'); document.getElementById('clienteCep').focus(); return null; }
+    if (!rua) { alert('Por favor, informe a rua.'); document.getElementById('clienteRua').focus(); return null; }
+    if (!numero) { alert('Por favor, informe o número.'); document.getElementById('clienteNumero').focus(); return null; }
   }
-  const lista=itens.map(i=>`- ${i.nome} x${i.qty}  ->  R$ ${(i.preco*i.qty).toFixed(2).replace('.',',')}`).join('\n');
-  const subtotal=itens.reduce((s,i)=>s+i.preco*i.qty,0);
-  const comp=complemento?`, ${complemento}`:'';
-  const endCompleto=`${rua}, ${numero}${comp} - ${bairro}, ${cidade} - ${uf} - CEP: ${cep}`;
-  const entregaLinha=ret?`*Entrega:* Retirada na loja - R. Santa Clara, 1050`:`*Endereco:* ${endCompleto}`;
-  const obsLinha=obs?`\n*Obs:* ${obs}`:'';
-  const msg=`Ola, Santo Fausto! Gostaria de fazer um pedido pelo site.\n\n*Nome:* ${nome}\n\n*PEDIDO:*\n${lista}\n\n*Subtotal: R$ ${subtotal.toFixed(2).replace('.',',')}*\n(frete a combinar)\n\n${entregaLinha}${obsLinha}\n\nPoderia confirmar a disponibilidade e calcular o frete?`;
-  window.open('https://wa.me/5512981844404?text='+encodeURIComponent(msg),'_blank');
+  const lista = itens.map(i => `- ${i.nome} x${i.qty}  ->  R$ ${(i.preco * i.qty).toFixed(2).replace('.', ',')}`).join('\n');
+  const subtotal = itens.reduce((s, i) => s + i.preco * i.qty, 0);
+  const comp = complemento ? `, ${complemento}` : '';
+  const endCompleto = `${rua}, ${numero}${comp} - ${bairro}, ${cidade} - ${uf} - CEP: ${cep}`;
+  const entregaLinha = ret ? `*Entrega:* Retirada na loja - R. Santa Clara, 1050` : `*Endereco:* ${endCompleto}`;
+  const obsLinha = obs ? `\n*Obs:* ${obs}` : '';
+  return `Ola, Santo Fausto! Gostaria de fazer um pedido pelo site.\n\n*Nome:* ${nome}\n\n*PEDIDO:*\n${lista}\n\n*Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}*\n(frete a combinar)\n\n${entregaLinha}${obsLinha}\n\nPoderia confirmar a disponibilidade e calcular o frete?`;
+}
+
+// Etapa 3 — mostra preview da mensagem antes de enviar (item 8)
+function prepararPreview() {
+  const m = construirMensagem();
+  if (!m) return;
+  // Formata pra leitura mais limpa: remove * de negrito do whatsapp
+  const limpo = m.replace(/\*([^*]+)\*/g, '$1');
+  document.getElementById('cartPreviewMsg').textContent = limpo;
+  document.getElementById('cartEtapa2').style.display = 'none';
+  document.getElementById('cartEtapa3').style.display = 'flex';
+  document.getElementById('cartTitulo').textContent = 'Revisar mensagem';
+}
+
+function enviarPedidoFinal() {
+  const m = construirMensagem();
+  if (!m) return;
+  window.open('https://wa.me/5512981844404?text=' + encodeURIComponent(m), '_blank');
 }
 
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('aberto');}
