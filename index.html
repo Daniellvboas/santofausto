@@ -263,6 +263,27 @@ footer a { color:var(--verde-claro); text-decoration:none; }
 .frete-aviso-carrinho { background:#fffbf0; border:1px solid #e8d5a0; border-radius:4px; padding:0.65rem 0.9rem; display:flex; align-items:flex-start; gap:0.6rem; font-size:0.78rem; color:#6b4f3a; line-height:1.5; margin-bottom:0.8rem; }
 .frete-aviso-carrinho span:first-child { flex-shrink:0; font-size:0.9rem; margin-top:1px; }
 
+/* FAQ */
+#faq { background:var(--creme); }
+.faq-grid { max-width:780px; margin:0 auto; display:flex; flex-direction:column; gap:0.6rem; }
+.faq-item { background:white; border:1px solid rgba(74,124,74,0.12); border-radius:4px; overflow:hidden; transition:border-color 0.2s, box-shadow 0.2s; }
+.faq-item[open] { border-color:rgba(74,124,74,0.3); box-shadow:0 4px 18px var(--sombra); }
+.faq-pergunta { padding:1.1rem 1.4rem; font-family:'Jost',sans-serif; font-size:0.92rem; font-weight:500; color:var(--verde-escuro); cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:1rem; line-height:1.4; }
+.faq-pergunta::-webkit-details-marker { display:none; }
+.faq-pergunta:hover { background:var(--creme-escuro); }
+.faq-pergunta::after { content:'+'; font-family:'Jost',sans-serif; font-size:1.4rem; font-weight:300; color:var(--verde-medio); flex-shrink:0; transition:transform 0.25s; line-height:1; }
+.faq-item[open] .faq-pergunta::after { content:'−'; transform:rotate(180deg); }
+.faq-resposta { padding:0 1.4rem 1.2rem; font-size:0.88rem; line-height:1.65; color:var(--texto-suave); }
+.faq-resposta strong { color:var(--verde-escuro); font-weight:500; }
+.faq-resposta a { color:var(--verde-medio); text-decoration:underline; }
+.faq-resposta a:hover { color:var(--verde-escuro); }
+.faq-resposta p { margin-bottom:0.6rem; }
+.faq-resposta p:last-child { margin-bottom:0; }
+.faq-resposta ul { margin:0.4rem 0 0.6rem 1.2rem; }
+.faq-resposta ul li { margin-bottom:0.25rem; }
+.faq-cta { text-align:center; margin-top:2rem; font-size:0.85rem; color:var(--texto-suave); }
+.faq-cta a { color:var(--verde-medio); font-weight:500; }
+
 /* MODAL */
 .modal-overlay { position:fixed; inset:0; z-index:3000; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; padding:1rem; }
 .modal-overlay.aberto { display:flex; }
@@ -442,6 +463,80 @@ input:focus-visible, textarea:focus-visible { outline:none; }
 }
 </script>
 
+<!-- Schema.org — FAQPage (faz Google mostrar as perguntas direto no resultado de busca) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quanto tempo demora a entrega?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SJC e região via Uber Flash: mesmo dia útil ou dia seguinte. Outras cidades pelo Correios PAC: 5 a 10 dias úteis. SEDEX: 2 a 4 dias úteis. Retirada na loja disponível no mesmo dia."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quais formas de pagamento vocês aceitam?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Aceitamos PIX (pagamento instantâneo), dinheiro (na loja ou na entrega) e transferência bancária. Para outras formas, consulte pelo WhatsApp."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Os produtos têm validade?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, todos têm validade impressa na embalagem. Sabonetes: até 2 anos fechados, 6 meses após o uso. Óleos essenciais: 2 a 3 anos. Hidratantes e cremes: 12 a 18 meses. Shampoos e desodorantes: 12 meses."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso usar se tenho pele sensível ou alergia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim. Todos os produtos são 100% vegetais, sem parabenos e sem testes em animais. Recomendamos fazer um teste de tolerância (aplicar pequena quantidade no braço por 24h). Em caso de alergia conhecida, consulte a lista de ingredientes ou nos chame pelo WhatsApp."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Tem devolução ou troca?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, conforme o CDC: arrependimento em até 7 dias corridos após o recebimento (produto lacrado). Defeito de fabricação: troca imediata sem custo. Basta entrar em contato pelo WhatsApp."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Tem desconto para combo ou compras maiores?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, oferecemos condições especiais para combos e compras maiores, além de kits personalizados para presente, eventos e revenda. Consulte pelo WhatsApp."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Posso retirar os produtos na loja?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim, a retirada é gratuita na R. Santa Clara, 1050, Vila Adyana, São José dos Campos. Horários: Seg a Qui 9h-18h, Sex 9h-13h. Faça o pedido marcando 'Retirar na loja' e aguarde nossa confirmação pelo WhatsApp."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vou receber código de rastreamento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim. Para envios pelos Correios, enviamos o código de rastreamento pelo WhatsApp após a postagem. Para entregas via Uber Flash em SJC, você acompanha em tempo real pelo link enviado."
+      }
+    }
+  ]
+}
+</script>
+
 <body>
 <a href="#hero" class="skip-link">Pular para o conteúdo</a>
 
@@ -472,6 +567,7 @@ input:focus-visible, textarea:focus-visible { outline:none; }
     <li><a href="#porque" onclick="fecharMenu()">Por que nós</a></li>
     <li><a href="#depoimentos" onclick="fecharMenu()">Depoimentos</a></li>
     <li><a href="#entrega-info" onclick="fecharMenu()">Entrega</a></li>
+    <li><a href="#faq" onclick="fecharMenu()">FAQ</a></li>
     <li><a href="#historia" onclick="fecharMenu()">Nossa História</a></li>
     <li><a href="#contato" onclick="fecharMenu()">Contato</a></li>
   </ul>
@@ -767,6 +863,112 @@ input:focus-visible, textarea:focus-visible { outline:none; }
       </ul>
     </div>
   </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-header">
+    <div class="section-eyebrow">Perguntas Frequentes</div>
+    <h2>Tirando suas dúvidas</h2>
+    <p class="section-desc">As perguntas que mais recebemos no WhatsApp. Não achou o que procurava? Fale com a gente.</p>
+  </div>
+  <div class="faq-grid">
+    <details class="faq-item">
+      <summary class="faq-pergunta">Quanto tempo demora a entrega?</summary>
+      <div class="faq-resposta">
+        <p>O prazo depende da modalidade escolhida:</p>
+        <ul>
+          <li><strong>SJC e região (Uber Flash):</strong> entregamos no mesmo dia útil ou no dia seguinte, após confirmação do pedido.</li>
+          <li><strong>Outras cidades (Correios PAC):</strong> em média 5 a 10 dias úteis.</li>
+          <li><strong>Outras cidades (Correios SEDEX):</strong> em média 2 a 4 dias úteis.</li>
+          <li><strong>Retirada na loja:</strong> disponível no mesmo dia após confirmação.</li>
+        </ul>
+        <p>O prazo exato é combinado pelo WhatsApp após o pedido.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-pergunta">Quais formas de pagamento vocês aceitam?</summary>
+      <div class="faq-resposta">
+        <p>Aceitamos:</p>
+        <ul>
+          <li><strong>PIX</strong> — pagamento instantâneo (forma mais rápida)</li>
+          <li><strong>Dinheiro</strong> — na loja ou no momento da entrega</li>
+          <li><strong>Transferência bancária</strong></li>
+        </ul>
+        <p>Para outras formas de pagamento, consulte pelo <a href="https://wa.me/5512981844404" target="_blank">WhatsApp</a>.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-pergunta">Os produtos têm validade? Quanto tempo duram?</summary>
+      <div class="faq-resposta">
+        <p>Sim, todos os nossos produtos têm validade impressa na embalagem. Por serem feitos com ingredientes naturais e sem conservantes sintéticos, recomendamos:</p>
+        <ul>
+          <li><strong>Sabonetes artesanais:</strong> até 2 anos fechados · 6 meses após o primeiro uso</li>
+          <li><strong>Óleos essenciais:</strong> 2 a 3 anos quando bem armazenados (longe de luz e calor)</li>
+          <li><strong>Hidratantes e cremes:</strong> 12 a 18 meses</li>
+          <li><strong>Shampoos e desodorantes:</strong> 12 meses</li>
+        </ul>
+        <p>Guarde sempre em local fresco e seco, longe da luz solar direta.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-pergunta">Posso usar se tenho pele sensível ou alergia?</summary>
+      <div class="faq-resposta">
+        <p>Nossa linha foi criada exatamente pensando em peles sensíveis — a Santo Fausto nasceu para resolver alergias da nossa própria família. Todos os produtos são <strong>100% vegetais</strong>, <strong>sem parabenos</strong> e <strong>sem testes em animais</strong>.</p>
+        <p>Ainda assim, recomendamos:</p>
+        <ul>
+          <li>Faça um <strong>teste de tolerância</strong>: aplique uma pequena quantidade na parte interna do braço e aguarde 24h antes do uso completo.</li>
+          <li>Se você tem alergia a algum ingrediente específico, <strong>consulte a lista de ingredientes</strong> do produto ou nos chame pelo WhatsApp — informamos a composição completa.</li>
+          <li>Em caso de qualquer reação, suspenda o uso e procure orientação médica.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-pergunta">E se eu não gostar do produto? Tem devolução ou troca?</summary>
+      <div class="faq-resposta">
+        <p>Sim, conforme o Código de Defesa do Consumidor:</p>
+        <ul>
+          <li><strong>Arrependimento (compras a distância):</strong> você tem até 7 dias corridos após o recebimento para solicitar a devolução, desde que o produto esteja lacrado e em perfeitas condições.</li>
+          <li><strong>Defeito de fabricação:</strong> troca imediata sem custo adicional. Basta nos enviar uma foto pelo WhatsApp.</li>
+        </ul>
+        <p>Para qualquer caso, entre em contato pelo <a href="https://wa.me/5512981844404" target="_blank">WhatsApp</a> que resolvemos rapidinho.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-pergunta">Tem desconto para combo ou compras maiores?</summary>
+      <div class="faq-resposta">
+        <p>Sim! Para compras a partir de um valor mínimo ou em combos de produtos, oferecemos condições especiais. Também fazemos <strong>kits personalizados</strong> para presente, eventos e revenda.</p>
+        <p>Mande sua lista pelo <a href="https://wa.me/5512981844404" target="_blank">WhatsApp</a> que montamos o melhor combo pra você.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-pergunta">Posso retirar os produtos na loja? Como funciona?</summary>
+      <div class="faq-resposta">
+        <p>Sim! A retirada na loja é <strong>gratuita</strong>:</p>
+        <ul>
+          <li><strong>Endereço:</strong> R. Santa Clara, 1050 — Vila Adyana, São José dos Campos — SP</li>
+          <li><strong>Horários:</strong> Segunda a Quinta: 9h às 18h · Sexta: 9h às 13h</li>
+          <li><strong>Como funciona:</strong> Faça o pedido pelo site marcando "Retirar na loja" no checkout. Aguarde nossa confirmação pelo WhatsApp antes de vir buscar.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-pergunta">Vou receber código de rastreamento?</summary>
+      <div class="faq-resposta">
+        <p>Sim. Para envios pelos <strong>Correios</strong>, enviamos o código de rastreamento pelo WhatsApp logo após a postagem (geralmente em até 1 dia útil após o pagamento confirmado).</p>
+        <p>Para entregas via <strong>Uber Flash</strong> em SJC, você acompanha em tempo real pelo link que enviamos.</p>
+      </div>
+    </details>
+  </div>
+
+  <p class="faq-cta">Não achou sua dúvida aqui? <a href="https://wa.me/5512981844404" target="_blank">Chama a gente no WhatsApp →</a></p>
 </section>
 
 <!-- NOSSA HISTÓRIA -->
