@@ -30,7 +30,11 @@
 <meta name="twitter:image" content="https://santofausto.vercel.app/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://maps.google.com">
+<link rel="dns-prefetch" href="https://viacep.com.br">
+<link rel="preload" as="image" href="logo.png" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#2d4a2d">
 <style>
 :root {
   --verde-escuro: #2d4a2d;
@@ -398,6 +402,23 @@ footer a { color:var(--verde-claro); text-decoration:none; }
 *:focus-visible { outline:2px solid var(--verde-medio); outline-offset:2px; border-radius:2px; }
 button:focus-visible, a:focus-visible { outline-offset:3px; }
 input:focus-visible, textarea:focus-visible { outline:none; }
+
+/* BANNER LGPD — consentimento de cookies */
+.lgpd-banner { position:fixed; bottom:1rem; left:1rem; right:1rem; max-width:540px; margin:0 auto; background:white; border:1px solid rgba(74,124,74,0.18); border-radius:6px; padding:1.2rem 1.3rem 1.1rem; z-index:9998; box-shadow:0 12px 36px rgba(0,0,0,0.18); transform:translateY(calc(100% + 2rem)); opacity:0; transition:transform 0.35s ease, opacity 0.3s; font-family:'Jost',sans-serif; }
+.lgpd-banner.visivel { transform:translateY(0); opacity:1; }
+.lgpd-banner-titulo { font-family:'Playfair Display',serif; font-size:1rem; color:var(--verde-escuro); margin-bottom:0.35rem; font-weight:400; }
+.lgpd-banner-texto { font-size:0.82rem; color:var(--texto-suave); line-height:1.55; margin-bottom:0.85rem; }
+.lgpd-banner-texto a { color:var(--verde-medio); text-decoration:underline; }
+.lgpd-banner-actions { display:flex; gap:0.6rem; flex-wrap:wrap; }
+.lgpd-btn { background:var(--verde-escuro); color:white; border:none; padding:0.65rem 1.2rem; border-radius:3px; font-family:'Jost',sans-serif; font-size:0.78rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; transition:background 0.2s, transform 0.15s; flex:1; min-width:120px; }
+.lgpd-btn:hover { background:var(--verde-medio); transform:translateY(-1px); }
+.lgpd-btn.secundario { background:transparent; color:var(--verde-escuro); border:1px solid rgba(74,124,74,0.4); }
+.lgpd-btn.secundario:hover { background:rgba(74,124,74,0.06); border-color:var(--verde-medio); color:var(--verde-medio); transform:translateY(-1px); }
+@media (max-width:480px) {
+  .lgpd-banner { left:0.6rem; right:0.6rem; bottom:0.6rem; padding:1rem 1.1rem 0.9rem; }
+  .lgpd-banner-titulo { font-size:0.92rem; }
+  .lgpd-banner-texto { font-size:0.78rem; }
+}
 </style>
 
 <!-- Schema.org — LocalBusiness (SEO local) -->
@@ -540,6 +561,16 @@ input:focus-visible, textarea:focus-visible { outline:none; }
 <body>
 <a href="#hero" class="skip-link">Pular para o conteúdo</a>
 
+<!-- BANNER LGPD — aparece na primeira visita; não aparece se já respondido -->
+<div class="lgpd-banner" id="lgpdBanner" role="dialog" aria-labelledby="lgpdTitulo" aria-describedby="lgpdTexto">
+  <div class="lgpd-banner-titulo" id="lgpdTitulo">🌿 Sua privacidade é importante</div>
+  <p class="lgpd-banner-texto" id="lgpdTexto">Usamos cookies essenciais para o site funcionar e cookies de análise para entender como você usa nossa loja — isso nos ajuda a melhorar. Você pode aceitar ou recusar a qualquer momento.</p>
+  <div class="lgpd-banner-actions">
+    <button class="lgpd-btn secundario" onclick="recusarCookies()">Recusar</button>
+    <button class="lgpd-btn" onclick="aceitarCookies()">Aceitar</button>
+  </div>
+</div>
+
 <!-- ANÚNCIO TOPO -->
 <div class="anuncio-topo">
   <div class="anuncio-item">
@@ -559,7 +590,7 @@ input:focus-visible, textarea:focus-visible { outline:none; }
 <!-- NAVBAR -->
 <nav>
   <a href="#" class="nav-logo">
-    <img src="logo.png" alt="Santo Fausto Produtos Naturais — logo" width="600" height="368" loading="eager">
+    <img src="logo.png" alt="Santo Fausto Produtos Naturais — logo" width="600" height="368" loading="eager" fetchpriority="high">
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#mais-vendidos" onclick="fecharMenu()">Mais vendidos</a></li>
@@ -1609,6 +1640,63 @@ function enviarPedidoFinal() {
 
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('aberto');}
 function fecharMenu(){document.getElementById('navLinks').classList.remove('aberto');}
+
+// ===== LGPD — gerenciamento de consentimento de cookies =====
+// O Google Analytics só carrega se o usuário aceitar.
+const LGPD_KEY = 'sf_lgpd_consent';
+
+function getConsent() {
+  try { return localStorage.getItem(LGPD_KEY); } catch (e) { return null; }
+}
+function setConsent(val) {
+  try { localStorage.setItem(LGPD_KEY, val); } catch (e) {}
+}
+
+function mostrarBannerLGPD() {
+  if (getConsent() !== null) return;
+  setTimeout(() => {
+    document.getElementById('lgpdBanner')?.classList.add('visivel');
+  }, 1500);
+}
+function esconderBannerLGPD() {
+  document.getElementById('lgpdBanner')?.classList.remove('visivel');
+}
+function aceitarCookies() {
+  setConsent('aceito');
+  esconderBannerLGPD();
+  carregarAnalytics();
+}
+function recusarCookies() {
+  setConsent('recusado');
+  esconderBannerLGPD();
+}
+
+// ===== Google Analytics 4 — carrega APENAS se usuário aceitou =====
+// SUBSTITUA "G-XXXXXXXXXX" pelo ID real quando vocês criarem a conta GA4.
+const GA4_ID = 'G-XXXXXXXXXX';
+
+function carregarAnalytics() {
+  if (!GA4_ID || GA4_ID === 'G-XXXXXXXXXX') return; // sem ID configurado ainda
+  if (window.gtag) return; // já carregado
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', GA4_ID, { anonymize_ip: true });
+}
+
+// Na carga: se usuário já aceitou antes, carrega analytics direto. Senão, mostra banner.
+if (getConsent() === 'aceito') {
+  carregarAnalytics();
+} else {
+  mostrarBannerLGPD();
+}
 
 
 // ESC key closes open dialogs
