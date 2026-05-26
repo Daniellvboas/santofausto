@@ -149,7 +149,11 @@ h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.6rem); f
 .produto-badge { position:absolute; top:10px; left:10px; z-index:2; font-size:0.65rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 0.7rem; border-radius:2px; }
 .badge-mais-vendido { background:var(--verde-escuro); color:white; }
 .badge-destaque { background:var(--dourado); color:white; }
-.produto-img { width:100%; height:180px; background:linear-gradient(135deg,var(--creme-escuro) 0%,var(--verde-palido) 100%); display:flex; align-items:center; justify-content:center; font-size:3.5rem; flex-shrink:0; }
+.produto-img { width:100%; height:180px; background:linear-gradient(135deg,var(--creme-escuro) 0%,var(--verde-palido) 100%); display:flex; align-items:center; justify-content:center; font-size:3.5rem; border-bottom:1px solid rgba(74,124,74,0.08); overflow:hidden; position:relative; }
+.produto-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease; }
+.produto-card:hover .produto-img img { transform:scale(1.04); }
+.produto-emoji { width:100%; height:160px; background:linear-gradient(135deg,var(--creme-escuro) 0%,var(--verde-palido) 100%); display:flex; align-items:center; justify-content:center; font-size:3rem; overflow:hidden; }
+.produto-emoji img { width:100%; height:100%; object-fit:cover; display:block; } flex-shrink:0; }
 .produto-info { padding:1.2rem; flex:1; display:flex; flex-direction:column; }
 .produto-categoria { font-size:0.65rem; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--verde-medio); margin-bottom:0.4rem; }
 .produto-nome { font-family:'Playfair Display',serif; font-size:1rem; font-weight:400; color:var(--verde-escuro); margin-bottom:0.4rem; line-height:1.3; }
@@ -292,7 +296,8 @@ footer a { color:var(--verde-claro); text-decoration:none; }
 .modal-overlay { position:fixed; inset:0; z-index:3000; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; padding:1rem; }
 .modal-overlay.aberto { display:flex; }
 .modal-box { background:var(--creme); border-radius:6px; max-width:560px; width:100%; max-height:90vh; overflow-y:auto; position:relative; }
-.modal-img { width:100%; height:240px; background:linear-gradient(135deg,var(--creme-escuro) 0%,var(--verde-palido) 100%); display:flex; align-items:center; justify-content:center; font-size:5rem; border-radius:6px 6px 0 0; }
+.modal-img { width:100%; height:280px; background:linear-gradient(135deg,var(--creme-escuro) 0%,var(--verde-palido) 100%); display:flex; align-items:center; justify-content:center; font-size:5rem; border-radius:6px 6px 0 0; overflow:hidden; }
+.modal-img img { width:100%; height:100%; object-fit:cover; display:block; }
 .modal-body { padding:1.8rem; }
 .modal-cat { font-size:0.65rem; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--verde-medio); margin-bottom:0.4rem; }
 .modal-nome { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:var(--verde-escuro); margin-bottom:1rem; line-height:1.2; }
@@ -383,7 +388,8 @@ footer a { color:var(--verde-claro); text-decoration:none; }
   .contato-grid { grid-template-columns:1fr; }
   .cart-drawer { width:100%; right:-100%; }
   .produtos-grid { grid-template-columns:1fr 1fr; gap:0.85rem; }
-  .produto-img { height:150px; font-size:3rem; }
+  .produto-img { height:140px; font-size:3rem; }
+  .produto-emoji { height:130px; font-size:2.5rem; }
   .produto-info { padding:0.75rem; }
   .produto-nome { font-size:0.88rem; }
   .produto-desc { font-size:0.75rem; -webkit-line-clamp:2; }
@@ -1230,10 +1236,10 @@ const produtos = [
   { id:6,  nome:"Sabonete Oliva 80%",               cat:"Sabonetes",        preco:30,  emoji:"🧼", desc:"Sabonete natural hipoalergênico com 80% de azeite de oliva.", descLonga:"Com 80% de azeite de oliva extravirgem na fórmula, este sabonete é um dos mais hidratantes da linha. Extremamente suave, é ideal para peles muito secas, bebês e pessoas com dermatites. Um clássico da sabonaria artesanal mediterrânea." },
   { id:7,  nome:"Sabonete Açafrão",                 cat:"Sabonetes",        preco:30,  emoji:"🧼", desc:"Sabonete natural hipoalergênico com manteiga de ucuíba.", descLonga:"O açafrão é conhecido por suas propriedades anti-inflamatórias e iluminadoras de pele. Este sabonete combina o açafrão com a manteiga de ucuíba para uma limpeza suave que deixa a pele com toque aveludado e luminoso." },
   { id:8,  nome:"Sabonete Cicatrizante",            cat:"Sabonetes",        preco:22,  emoji:"🧼", desc:"Sabonete natural hipoalergênico com propriedades cicatrizantes.", descLonga:"Formulado com ativos naturais com ação cicatrizante e regeneradora, este sabonete é indicado para peles com feridas superficiais, estrias, cicatrizes e pele ressecada. Suave o suficiente para uso diário." },
-  { id:9,  nome:"Sabonete Sal Grosso",              cat:"Sabonetes",        preco:30,  emoji:"🧼", desc:"Relaxante muscular, super cremoso. Com arruda, alecrim e hortelã.", descLonga:"Um sabonete terapêutico completo! O sal grosso esfoliia suavemente enquanto a mistura de arruda, alecrim e hortelã proporciona sensação de leveza e relaxamento muscular. Ideal para usar após atividades físicas ou ao final de um dia longo." },
+  { id:9,  nome:"Sabonete Sal Grosso",              cat:"Sabonetes",        preco:30,  emoji:"🧼", img:"images/produto-9-sal-grosso.jpg", desc:"Relaxante muscular, super cremoso. Com arruda, alecrim e hortelã.", descLonga:"Um sabonete terapêutico completo! O sal grosso esfoliia suavemente enquanto a mistura de arruda, alecrim e hortelã proporciona sensação de leveza e relaxamento muscular. Ideal para usar após atividades físicas ou ao final de um dia longo." },
   { id:10, nome:"Sabonete Líquido Melaleuca",       cat:"Sabonetes",        preco:75,  emoji:"🧴", desc:"Hipoalergênico, feito com azeite de oliva. Para pele sensível.", descLonga:"Versão líquida do clássico sabonete de melaleuca. Prático para uso no banheiro e na cozinha. Limpa com eficiência sem ressecar as mãos. A base de azeite de oliva garante hidratação mesmo após lavagens frequentes." },
   { id:11, nome:"Sabonete Líquido Carvão Ativado",  cat:"Sabonetes",        preco:53,  emoji:"🧴", desc:"Para rosto com pele mista e oleosa. Purifica e equilibra.", descLonga:"O carvão ativado tem o poder de absorver impurezas, excesso de oleosidade e toxinas da pele. Este sabonete líquido é ideal para peles mistas e oleosas, especialmente para o rosto. Desobstrui poros e deixa a pele matte e equilibrada." },
-  { id:12, nome:"Óleo Essencial Lavanda",           cat:"Óleos Essenciais", preco:69,  emoji:"💜", badge:"mais-vendido", desc:"Calmante, relaxante. Um dos mais versáteis da aromaterapia.", descLonga:"A lavanda é o óleo essencial mais versátil da aromaterapia. Indicado para ansiedade, insônia, dores de cabeça e como antiséptico natural. Pode ser usado no difusor, no travesseiro, misturado a óleos vegetais para massagem ou diluído em água para borrifar no ambiente." },
+  { id:12, nome:"Óleo Essencial Lavanda",           cat:"Óleos Essenciais", preco:69,  emoji:"💜", img:"images/produto-12-oleo-lavanda.jpg", badge:"mais-vendido", desc:"Calmante, relaxante. Um dos mais versáteis da aromaterapia.", descLonga:"A lavanda é o óleo essencial mais versátil da aromaterapia. Indicado para ansiedade, insônia, dores de cabeça e como antiséptico natural. Pode ser usado no difusor, no travesseiro, misturado a óleos vegetais para massagem ou diluído em água para borrifar no ambiente." },
   { id:13, nome:"Óleo Essencial Laranja",           cat:"Óleos Essenciais", preco:35,  emoji:"🍊", desc:"Alegre e energizante. Excelente para difusor.", descLonga:"O óleo de laranja doce é um verdadeiro antidepressivo natural. Seu aroma cítrico e alegre eleva o humor, energiza o ambiente e combate o estresse. Excelente em difusor para escritórios e ambientes de trabalho. Também pode ser usado em limpeza doméstica." },
   { id:14, nome:"Óleo Essencial Citronela",         cat:"Óleos Essenciais", preco:33,  emoji:"🌿", desc:"Repelente natural de insetos.", descLonga:"A citronela é o repelente natural por excelência. Use no difusor para afastar mosquitos e insetos de ambientes internos e externos. Pode ser diluído em água para borrifar no corpo e roupas. Seguro e eficaz, sem químicos agressivos." },
   { id:15, nome:"Óleo Essencial Eucalipto",         cat:"Óleos Essenciais", preco:35,  emoji:"🌱", desc:"Purificante e descongestionante.", descLonga:"O eucalipto é amplamente conhecido por suas propriedades respiratórias. Indicado para gripes, resfriados e sinusites — coloque algumas gotas em água quente e inale o vapor. No difusor, purifica o ar e elimina bactérias do ambiente." },
@@ -1267,7 +1273,7 @@ const produtos = [
   { id:43, nome:"Óleo de Rícino (Mamona)",          cat:"Óleos Vegetais",   preco:16,  emoji:"✨", desc:"Para crescimento de pelos, cílios e sobrancelhas.", descLonga:"O óleo de rícino é conhecido por estimular o crescimento de pelos. Aplicar com um pincel nos cílios e sobrancelhas antes de dormir. Para o couro cabeludo, massagear semanalmente para estimular o crescimento e reduzir a queda. 100% puro, prensado a frio." },
   { id:44, nome:"Óleo de Semente de Uvas",          cat:"Óleos Vegetais",   preco:17,  emoji:"🍇", desc:"Hidratante, fortalecedor e ultra leve.", descLonga:"Um dos óleos vegetais mais leves disponíveis. Absorção rápida e toque seco fazem dele perfeito para peles mistas e oleosas que precisam de hidratação sem oleosidade. Excelente como base para massagens e para potencializar outros óleos." },
   { id:45, nome:"Óleo de Rosa Mosqueta",            cat:"Óleos Vegetais",   preco:32,  emoji:"🌹", desc:"Excelente anti-idade, antirrugas e regenerador.", descLonga:"A rosa mosqueta é famosa por suas propriedades regeneradoras. Rica em vitamina C e ácidos graxos essenciais, reduz manchas, cicatrizes, linhas finas e melhora a textura da pele. Aplicar algumas gotas no rosto limpo antes de dormir. Resultados visíveis em 4-6 semanas." },
-  { id:46, nome:"Óleo Antidor para Massagem",       cat:"Óleos Vegetais",   preco:48,  emoji:"💆", badge:"mais-vendido", desc:"Sinergia com 9 óleos essenciais para dores musculares.", descLonga:"Blend especial com 9 óleos essenciais selecionados por suas propriedades analgésicas e anti-inflamatórias. Ideal para dores musculares, tensão nas costas, pescoço e ombros. Massagear com movimentos circulares nas regiões doloridas. Alívio rápido e duradouro." },
+  { id:46, nome:"Óleo Antidor para Massagem",       cat:"Óleos Vegetais",   preco:48,  emoji:"💆", img:"images/produto-46-oleo-antidor.jpg", badge:"mais-vendido", desc:"Sinergia com 9 óleos essenciais para dores musculares.", descLonga:"Blend especial com 9 óleos essenciais selecionados por suas propriedades analgésicas e anti-inflamatórias. Ideal para dores musculares, tensão nas costas, pescoço e ombros. Massagear com movimentos circulares nas regiões doloridas. Alívio rápido e duradouro." },
   { id:47, nome:"Roll-on Sinergia Lavanda",         cat:"Roll-on & Blends", preco:52,  emoji:"🌀", desc:"Aromaterápico: tranquiliza os sentidos e reduz a ansiedade.", descLonga:"Roll-on pronto para uso com blend de lavanda e outros óleos calmantes. Aplicar nos pulsos, atrás das orelhas e no pescoço quando sentir ansiedade ou antes de dormir. Prático para levar na bolsa e usar a qualquer momento do dia." },
   { id:48, nome:"Roll-on Sinergia Ylang & Laranja", cat:"Roll-on & Blends", preco:52,  emoji:"🌀", desc:"Aromaterápico: relaxante e estimulante ao mesmo tempo.", descLonga:"A combinação de ylang ylang e laranja cria um blend único: relaxante para a mente, estimulante para as emoções. Indicado para momentos de baixo astral, desmotivação ou quando precisa de equilíbrio emocional. Aplicar nos pulsos e inalar profundamente." },
   { id:49, nome:"Roll-on Elixir da Prosperidade",   cat:"Roll-on & Blends", preco:52,  emoji:"✨", desc:"Aromaterápico: canaliza energia positiva e foco.", descLonga:"Blend especial formulado com óleos essenciais associados ao foco, clareza mental e energia positiva. Usado por quem busca concentração em momentos importantes ou deseja iniciar o dia com intenção. Aplicar nos pulsos e respirar profundamente antes de atividades importantes." },
@@ -1309,6 +1315,14 @@ cats.forEach(c => {
   filtrosEl.appendChild(btn);
 });
 
+// Helper: renderiza imagem do produto OU emoji como fallback
+function midia(p, ctx) {
+  if (p.img) {
+    return `<img src="${p.img}" alt="${p.nome}" loading="lazy" width="800" height="800">`;
+  }
+  return p.emoji;
+}
+
 function renderProdutos(cat, busca) {
   const grid = document.getElementById('produtosGrid');
   let lista = cat ? produtos.filter(p=>p.cat===cat) : produtos;
@@ -1320,7 +1334,7 @@ function renderProdutos(cat, busca) {
   grid.innerHTML = lista.map(p=>`
     <div class="produto-card" onclick="abrirModal(${p.id})">
       ${p.badge?`<span class="produto-badge ${badgeClasses[p.badge]}">${badgeLabels[p.badge]}</span>`:''}
-      <div class="produto-img">${p.emoji}</div>
+      <div class="produto-img">${midia(p, 'card')}</div>
       <div class="produto-info">
         <div class="produto-categoria">${p.cat}</div>
         <div class="produto-nome">${p.nome}</div>
@@ -1389,7 +1403,7 @@ function abrirProdutoDestaque(id) {
 function abrirModal(id) {
   const p = produtos.find(x=>x.id===id);
   if (!p) return;
-  document.getElementById('modalImg').textContent = p.emoji;
+  document.getElementById('modalImg').innerHTML = midia(p, 'modal');
   document.getElementById('modalCat').textContent = p.cat;
   document.getElementById('modalNome').textContent = p.nome;
   document.getElementById('modalDesc').textContent = p.descLonga||p.desc;
@@ -1429,7 +1443,7 @@ function renderMaisVendidos() {
     const badgeLabel = p.badge === 'mais-vendido' ? 'Mais vendido' : p.badge === 'destaque' ? 'Destaque' : '';
     return `<div class="produto-card" onclick="abrirModal(${p.id})" style="cursor:pointer;">
       ${badgeLabel ? `<div class="produto-badge ${p.badge}">${badgeLabel}</div>` : ''}
-      <div class="produto-emoji">${p.emoji}</div>
+      <div class="produto-emoji">${midia(p, 'maisvendido')}</div>
       <div class="produto-info">
         <div class="produto-nome">${p.nome}</div>
         <div class="produto-preco">R$ ${p.preco.toFixed(2).replace('.',',')}</div>
